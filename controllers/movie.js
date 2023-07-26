@@ -4,14 +4,14 @@ const ValidationError = require('../errors/validation-err');
 const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
 
-module.exports.getmovies = (req, res, next) => {
+module.exports.getMovies = (req, res, next) => {
   Movie
     .find({})
     .then((movie) => res.send(movie))
     .catch(next);
 };
 
-module.exports.deletemovie = (req, res, next) => {
+module.exports.deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   Movie
     .findById(movieId)
@@ -35,7 +35,7 @@ module.exports.deletemovie = (req, res, next) => {
     });
 };
 
-module.exports.createmovie = (req, res, next) => {
+module.exports.createMovie = (req, res, next) => {
   const {
     nameRU,
     nameEN,
