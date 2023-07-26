@@ -35,10 +35,9 @@ app.get('/crash-test', () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
+app.use(limiter);
 
 app.use(requestLogger);
-
-app.use(limiter);
 
 app.post('/signup', createUserValidation, createUser);
 
