@@ -17,6 +17,7 @@ const auth = require('./middlewares/auth');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
+const { limiter } = require('./middlewares/rateLimiter');
 
 mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb')
   .then(() => {
@@ -36,6 +37,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.post('/signup', createUserValidation, createUser);
 
