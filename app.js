@@ -17,7 +17,7 @@ const auth = require('./middlewares/auth');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
-const { limiter } = require('./middlewares/rateLimiter');
+// const { limiter } = require('./middlewares/rateLimiter');
 
 mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb')
   .then(() => {
@@ -35,7 +35,7 @@ app.get('/crash-test', () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(limiter);
+// app.use(limiter);
 
 app.use(requestLogger);
 
