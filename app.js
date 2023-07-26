@@ -18,7 +18,7 @@ const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
 
-mongoose.connect('')
+mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb')
   .then(() => {
     console.log('connected success');
   });
