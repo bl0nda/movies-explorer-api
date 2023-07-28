@@ -19,7 +19,7 @@ const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
 
-// const { limiter } = require('./middlewares/rateLimiter');
+const { limiter } = require('./middlewares/rateLimiter');
 
 mongoose.connect(DB_URL)
   .then(() => {
@@ -37,7 +37,8 @@ app.get('/crash-test', () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-// app.use(limiter);
+
+app.use(limiter);
 
 app.use(requestLogger);
 
