@@ -47,11 +47,11 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name } = req.body;
+  const { name, email } = req.body;
   User
     .findByIdAndUpdate(
       req.user._id,
-      { name },
+      { name, email },
       {
         new: true,
         runValidators: true,
@@ -64,6 +64,8 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new ValidationError('Введены некорректные данные'));
+      } if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
       }
       return next(err);
     });

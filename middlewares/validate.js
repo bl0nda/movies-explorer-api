@@ -2,22 +2,18 @@
 const { celebrate, Joi } = require('celebrate');
 
 const URLRegex = /^https?:\/\/(www\.)?[a-z0-9\-._~:\/?#[\]@!$&'()*+,;=]+\.[a-z0-9\-._~:\/?#[\]@!$&'()*+,;=]+#?/;
+const EmailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
 
 module.exports.updateUserValidation = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required(),
-  }),
-});
-
-module.exports.updateAvatarValidation = celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string().pattern(URLRegex).required(),
+    email: Joi.string().required().email().pattern(EmailRegex),
   }),
 });
 
 module.exports.movieIdValidation = celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().required().length(24).hex(),
+    movieId: Joi.number().required(),
   }),
 });
 
@@ -39,15 +35,15 @@ module.exports.createMovieValidation = celebrate({
 
 module.exports.loginValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().email().pattern(EmailRegex),
     password: Joi.string().required().min(8),
   }),
 });
 
 module.exports.createUserValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().email().pattern(EmailRegex),
     password: Joi.string().required().min(8),
-    name: Joi.string(),
+    name: Joi.string().min(2).max(30),
   }),
 });
