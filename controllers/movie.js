@@ -17,7 +17,7 @@ module.exports.deleteMovie = (req, res, next) => {
     .findById(movieId)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Карточка не найдена');
+        throw new NotFoundError('Фильм не найден');
       }
       if (movie.owner.toString() !== req.user._id) {
         throw new ForbiddenError('Нельзя удалять чужой фильм.');

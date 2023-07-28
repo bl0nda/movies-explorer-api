@@ -1,11 +1,13 @@
+const { ServerErrorCode, ServerErrorMessage } = require('../utils/errorMessages');
+
 const handleError = (err, req, res, next) => {
-  const { statusCode = 500, message } = err;
+  const { statusCode = ServerErrorCode, message } = err;
   console.error(err);
   res
     .status(statusCode)
     .send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
+      message: statusCode === ServerErrorCode
+        ? ServerErrorMessage
         : message,
     });
   next();

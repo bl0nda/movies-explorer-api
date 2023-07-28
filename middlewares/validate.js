@@ -1,8 +1,7 @@
 /* eslint-disable no-useless-escape */
 const { celebrate, Joi } = require('celebrate');
 
-const URLRegex = /^https?:\/\/(www\.)?[a-z0-9\-._~:\/?#[\]@!$&'()*+,;=]+\.[a-z0-9\-._~:\/?#[\]@!$&'()*+,;=]+#?/;
-const EmailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
+const { URLRegex, EmailRegex } = require('../utils/Regex');
 
 module.exports.updateUserValidation = celebrate({
   body: Joi.object().keys({
