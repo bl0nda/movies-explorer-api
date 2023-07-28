@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { PORT = 3000, DB_URL } = process.env;
+const DB_URL = require('./utils/DB_URL');
 
 const app = express();
 
@@ -17,7 +18,8 @@ const auth = require('./middlewares/auth');
 const router = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handleError = require('./middlewares/handleError');
-const { limiter } = require('./middlewares/rateLimiter');
+
+// const { limiter } = require('./middlewares/rateLimiter');
 
 mongoose.connect(DB_URL)
   .then(() => {
@@ -35,7 +37,7 @@ app.get('/crash-test', () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(limiter);
+// app.use(limiter);
 
 app.use(requestLogger);
 
