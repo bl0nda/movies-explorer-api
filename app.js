@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
-const { PORT = 3000, NODE_ENV, DB_URL_PROD } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -21,7 +21,7 @@ const handleError = require('./middlewares/handleError');
 
 const { limiter } = require('./middlewares/rateLimiter');
 
-mongoose.connect(NODE_ENV === 'production' ? ${DB_URL_PROD} : ${DB_URL})
+mongoose.connect(DB_URL)
   .then(() => {
     console.log('connected success');
   });
