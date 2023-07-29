@@ -21,7 +21,7 @@ const handleError = require('./middlewares/handleError');
 
 const { limiter } = require('./middlewares/rateLimiter');
 
-mongoose.connect(NODE_ENV === 'production' ? DB_URL_PROD : DB_URL)
+mongoose.connect(NODE_ENV === 'production' ? ${DB_URL_PROD} : ${DB_URL})
   .then(() => {
     console.log('connected success');
   });
