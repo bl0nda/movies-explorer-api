@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DB_URL_PROD } = process.env;
 
 const app = express();
 
 const helmet = require('helmet');
 
-const DB_URL = require('./utils/DB_URL');
+const { DB_URL } = require('./utils/DB_URL');
 const { createUser, login } = require('./controllers/user');
 const { loginValidation, createUserValidation } = require('./middlewares/validate');
 const auth = require('./middlewares/auth');
@@ -21,7 +21,7 @@ const handleError = require('./middlewares/handleError');
 
 const { limiter } = require('./middlewares/rateLimiter');
 
-mongoose.connect(DB_URL)
+mongoose.connect(NODE_ENV === 'production' ? DB_URL_PROD : DB_URL)
   .then(() => {
     console.log('connected success');
   });
