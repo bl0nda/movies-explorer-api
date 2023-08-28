@@ -45,7 +45,7 @@ module.exports.createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     thumbnail,
     movieId,
   } = req.body;
@@ -59,7 +59,7 @@ module.exports.createMovie = (req, res, next) => {
       year,
       description,
       image,
-      trailer,
+      trailerLink,
       thumbnail,
       movieId,
       owner: req.user._id,
@@ -68,6 +68,7 @@ module.exports.createMovie = (req, res, next) => {
     // .then(() => console.log(req.user._id))
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        console.log(err);
         return next(new ValidationError('Введены некорректные данные'));
       }
       return next(err);
