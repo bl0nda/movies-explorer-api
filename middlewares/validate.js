@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 const { celebrate, Joi } = require('celebrate');
 
 const { URLRegex, EmailRegex } = require('../utils/Regex');
@@ -18,15 +17,15 @@ module.exports.movieIdValidation = celebrate({
 
 module.exports.createMovieValidation = celebrate({
   body: Joi.object().keys({
-    nameRu: Joi.string().required(),
-    nameEn: Joi.string().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(URLRegex),
-    trailer: Joi.string().required().pattern(URLRegex),
+    image: Joi.string().required(),
+    trailerLink: Joi.string().required().pattern(URLRegex),
     thumbnail: Joi.string().required().pattern(URLRegex),
     movieId: Joi.number().required(),
   }),
