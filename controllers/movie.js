@@ -14,7 +14,7 @@ module.exports.getMovies = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   Movie
-    .findOne({ movieId })
+    .findOne({ movieId, owner: req.user._id })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Фильм не найден');
